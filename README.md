@@ -1,1 +1,1 @@
-# gameGroup2
+# GameGroup2
