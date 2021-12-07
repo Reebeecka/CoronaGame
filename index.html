@@ -23,7 +23,6 @@
     #p1 {
       width: 100px;
       height: 100px;
-      background-color: red;
       position: absolute;
       bottom: 0px;
       left: 0px;
@@ -32,7 +31,6 @@
     #p2 {
       width: 100px;
       height: 100px;
-      background-color: blue;
       position: absolute;
       bottom: 20px;
       left: 20px;
@@ -43,13 +41,22 @@
       border: 1px solid black;
       position: relative;
     }
+    .mirror{
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+    }
+
   </style>
 </head>
 
 <body>
   <div id="game">
-    <div id="p1"></div>
-    <div id="p2"></div>
+    <div id="p1">
+      <img id="P1img">
+    </div>
+    <div id="p2">
+      <img id="P2img">
+    </div>
   </div>
 </body>
 
