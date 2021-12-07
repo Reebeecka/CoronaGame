@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>test</h1>
-    <H2>Rebecka testar</H2>
-    <h3>Hej jag heter Henrietta!</h3>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game</title>
+  <script defer src="script.js"></script>
+  <style>
+    *{
+      margin:0;
+      padding: 0;
+    }
+    body {
+      height: 100vh;
+      width: 90vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #p1 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+    }
+
+    #p2 {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+    #game{
+      width: 500px;
+      height: 500px;
+      border: 1px solid black;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game">
+    <div id="p1"></div>
+    <div id="p2"></div>
+  </div>
+</body>
+
 </html>
