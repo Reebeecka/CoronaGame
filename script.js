@@ -53,7 +53,7 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "d":
-            if (p1left > 380) {
+            if (p1left > 880) {
                 break;
             }
             p1left += 20;
@@ -69,7 +69,7 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "w":
-            if (p1bottom > 380) {
+            if (p1bottom > 680) {
                 break;
             }
             p1bottom += 20;
@@ -117,7 +117,7 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "ArrowRight":
-            if (p2left > 380) {
+            if (p2left > 880) {
                 break;
             }
             p2left += 20;
@@ -133,7 +133,7 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "ArrowUp":
-            if (p2bottom > 380) {
+            if (p2bottom > 680) {
                 break;
             }
             p2bottom += 20;
