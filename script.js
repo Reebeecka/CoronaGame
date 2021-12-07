@@ -2,11 +2,17 @@ let playerOne = document.getElementById("p1");
 let playerOneImg = document.getElementById("P1img");
 let playerTwo = document.getElementById("p2");
 
-let p1bottom = 0;
+let p1bottom = 250;
 let p1left = 0;
 
-let p2bottom = 20;
-let p2left = 20;
+let p2bottom = 250;
+let p2left = 1100;
+
+let p1left100 = p1left+100;
+let p1bottom100 = p1bottom+100;
+
+let p2left100 = p2left+100;
+let p2bottom100 = p2bottom+100;
 
 //PlayerOne images
 p1imgArray = new Array();
@@ -41,8 +47,11 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1left -= 20;
+            p1left100 = p1left+100;
+
             playerOne.style.left = p1left + "px";
             playerOne.classList="mirror";
+
 
             if (p1img.src == p1imgArray[0].src) {
                 p1img.src = p1imgArray[1].src;
@@ -50,6 +59,7 @@ document.addEventListener("keyup", (evt) => {
             else {
                 p1img.src = p1imgArray[0].src;
             }
+            colision()
             break;
 
         case "d":
@@ -57,8 +67,11 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1left += 20;
+            p1left100 = p1left+100;
+
             playerOne.style.left = p1left + "px";
             playerOne.classList="";
+
             
             if (p1img.src == p1imgArray[0].src) {
                 p1img.src = p1imgArray[1].src;
@@ -66,6 +79,7 @@ document.addEventListener("keyup", (evt) => {
             else {
                 p1img.src = p1imgArray[0].src;
             }
+            colision()
             break;
 
         case "w":
@@ -73,6 +87,8 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1bottom += 20;
+            p1bottom100 = p1bottom+100;
+
             playerOne.style.bottom = p1bottom + "px";
             console.log("right");
             if (p1img.src == p1imgArray[0].src) {
@@ -81,6 +97,7 @@ document.addEventListener("keyup", (evt) => {
             else {
                 p1img.src = p1imgArray[0].src;
             }
+            colision()
             break;
 
         case "s":
@@ -88,6 +105,8 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1bottom -= 20;
+            p1bottom100 = p1bottom+100;
+
             playerOne.style.bottom = p1bottom + "px";
             console.log("right");
             if (p1img.src == p1imgArray[0].src) {
@@ -96,6 +115,7 @@ document.addEventListener("keyup", (evt) => {
             else {
                 p1img.src = p1imgArray[0].src;
             }
+            colision()
             break;
 
         //PlaterTWO
@@ -105,8 +125,10 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p2left -= 20;
+            p2left100 = p2left+100;
+
             playerTwo.style.left = p2left + "px";
-            playerTwo.classList="mirror";
+            playerTwo.classList="";
 
             if (p2img.src == p2imgArray[0].src) {
                 p2img.src = p2imgArray[1].src;
@@ -114,6 +136,7 @@ document.addEventListener("keyup", (evt) => {
             else {
                 p2img.src = p2imgArray[0].src;
             }
+            colision()
             break;
 
         case "ArrowRight":
@@ -121,8 +144,10 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p2left += 20;
+            p2left100 = p2left+100;
+
             playerTwo.style.left = p2left + "px";
-            playerTwo.classList="";
+            playerTwo.classList="mirror";
             
             if (p2img.src == p2imgArray[0].src) {
                 p2img.src = p2imgArray[1].src;
@@ -130,6 +155,7 @@ document.addEventListener("keyup", (evt) => {
             else {
                 p2img.src = p2imgArray[0].src;
             }
+            colision()
             break;
 
         case "ArrowUp":
@@ -137,20 +163,25 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p2bottom += 20;
+            p2bottom100 = p2bottom+100;
+
             playerTwo.style.bottom = p2bottom + "px";
-            console.log("right");
+            
             if (p2img.src == p2imgArray[0].src) {
                 p2img.src = p2imgArray[1].src;
             }
             else {
                 p2img.src = p2imgArray[0].src;
             }
+            colision()
             break;
         case "ArrowDown":
             if (p2bottom < 20) {
                 break;
             }
             p2bottom -= 20;
+            p2bottom100 = p2bottom+100;
+
             playerTwo.style.bottom = p2bottom + "px";
             console.log("right");
             if (p2img.src == p2imgArray[0].src) {
@@ -159,9 +190,30 @@ document.addEventListener("keyup", (evt) => {
             else {
                 p2img.src = p2imgArray[0].src;
             }
+            colision()
             break;
 
         default:
             break;
     }
 })
+
+
+function colision(){
+
+    if (
+        p1left < p2left + p2left100 &&  //380 < 820 + 480
+
+        p1left + p1left100 > p2left && //380 + 480 > 820
+
+        p1bottom < p2bottom + p2bottom100 &&
+
+        p1bottom100 + p1bottom > p2bottom
+    )
+    {
+        console.log("p1left " + p1left + "p1left100 " + p1left100);
+        console.log("p2left " + p2left + "p2left100 " + p2left100)
+        p1img.style.border="1px solid black";
+        p2img.style.border="1px solid red";
+    }
+}
