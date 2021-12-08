@@ -35,7 +35,7 @@ let coronaTimer;
 let endGameTimer;
 
 //PlayerOne images
-p1imgArray = new Array();
+let p1imgArray = new Array();
 p1imgArray[0] = new Image();
 p1imgArray[0].src = "p1still.PNG";
 p1imgArray[1] = new Image();
@@ -49,7 +49,7 @@ let p1img = document.getElementById("P1img");
 p1img.src = p1imgArray[0].src;
 
 //PlayerTwo Images
-p2imgArray = new Array();
+let p2imgArray = new Array();
 p2imgArray[0] = new Image();
 p2imgArray[0].src = "p2still.PNG";
 p2imgArray[1] = new Image();
@@ -274,6 +274,7 @@ function p2ImgFunction() {
 }
 
 function endgame(){
+
     let userplay;
     if(p1points>p2points){
         userplay=confirm("Player One won, vill du spela igen?")
@@ -306,6 +307,7 @@ function endgame(){
 function timer(){
     time--;
     timerText.innerHTML = time
+
 
 }
 
