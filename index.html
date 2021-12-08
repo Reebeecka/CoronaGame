@@ -8,14 +8,16 @@
   <title>Game</title>
   <script defer src="script.js"></script>
   <style>
-    *{
-      margin:0;
+    * {
+      margin: 0;
       padding: 0;
     }
+
     body {
       height: 100vh;
       width: 100vw;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
@@ -35,17 +37,26 @@
       bottom: 250px;
       left: 1100px;
     }
-    #game{
+
+    #game {
       width: 1200px;
       height: 600px;
       border: 1px solid black;
       position: relative;
     }
-    .mirror{
+
+    .mirror {
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
     }
-
+    .pointscontainer{
+      display: flex;
+      justify-content: space-between;
+      gap: 10rem;
+    }
+    p{
+      font-size: 5rem;
+    }
   </style>
 </head>
 
@@ -57,6 +68,10 @@
     <div id="p2">
       <img id="P2img" class="mirror">
     </div>
+  </div>
+  <div class="pointscontainer">
+    <p id="p1Points"></p>
+    <p id="p2Points"></p>
   </div>
 </body>
 

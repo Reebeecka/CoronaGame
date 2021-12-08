@@ -1,6 +1,10 @@
+
 let playerOne = document.getElementById("p1");
 let playerOneImg = document.getElementById("P1img");
 let playerTwo = document.getElementById("p2");
+
+let p1Pointstext = document.getElementById("p1Points");
+let p2Pointstext = document.getElementById("p2Points");
 
 let p1bottom = 250;
 let p1left = 0;
@@ -8,11 +12,19 @@ let p1left = 0;
 let p2bottom = 250;
 let p2left = 1100;
 
-let p1left100 = p1left+70;
-let p1bottom100 = p1bottom+80;
+let p1left100 = p1left + 70;
+let p1bottom100 = p1bottom + 80;
 
-let p2left100 = p2left+70;
-let p2bottom100 = p2bottom+80;
+let p2left100 = p2left + 70;
+let p2bottom100 = p2bottom + 80;
+
+let p1points = 0;
+let p2points = 0;
+
+p1Pointstext.innerHTML = p1points;
+p2Pointstext.innerHTML = p2points;
+
+let corona = false;
 
 //PlayerOne images
 p1imgArray = new Array();
@@ -20,6 +32,10 @@ p1imgArray[0] = new Image();
 p1imgArray[0].src = "p1still.PNG";
 p1imgArray[1] = new Image();
 p1imgArray[1].src = 'p1run.PNG';
+p1imgArray[2] = new Image();
+p1imgArray[2].src = 'p1stillcorona.PNG';
+p1imgArray[3] = new Image();
+p1imgArray[3].src = 'p1runcorona.PNG';
 
 let p1img = document.getElementById("P1img");
 p1img.src = p1imgArray[0].src;
@@ -30,12 +46,16 @@ p2imgArray[0] = new Image();
 p2imgArray[0].src = "p2still.PNG";
 p2imgArray[1] = new Image();
 p2imgArray[1].src = 'p2run.PNG';
+p2imgArray[2] = new Image();
+p2imgArray[2].src = 'p2stillcorona.PNG';
+p2imgArray[3] = new Image();
+p2imgArray[3].src = 'p2runcorona.PNG';
 
 let p2img = document.getElementById("P2img");
 p2img.src = p2imgArray[0].src;
 
 
-//Key movements
+
 document.addEventListener("keyup", (evt) => {
 
     switch (evt.key) {
@@ -47,18 +67,14 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1left -= 20;
-            p1left100 = p1left+70;
+            p1left100 = p1left + 70;
 
             playerOne.style.left = p1left + "px";
-            playerOne.classList="mirror";
+            playerOne.classList = "mirror";
 
+            //coronaFunction();
+            p1ImgFunction();
 
-            if (p1img.src == p1imgArray[0].src) {
-                p1img.src = p1imgArray[1].src;
-            }
-            else {
-                p1img.src = p1imgArray[0].src;
-            }
             colision()
             break;
 
@@ -67,18 +83,13 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1left += 20;
-            p1left100 = p1left+70;
+            p1left100 = p1left + 70;
 
             playerOne.style.left = p1left + "px";
-            playerOne.classList="";
+            playerOne.classList = "";
 
-            
-            if (p1img.src == p1imgArray[0].src) {
-                p1img.src = p1imgArray[1].src;
-            }
-            else {
-                p1img.src = p1imgArray[0].src;
-            }
+            //coronafunction();
+            p1ImgFunction();
             colision()
             break;
 
@@ -87,16 +98,12 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1bottom += 20;
-            p1bottom100 = p1bottom+80;
+            p1bottom100 = p1bottom + 80;
 
             playerOne.style.bottom = p1bottom + "px";
 
-            if (p1img.src == p1imgArray[0].src) {
-                p1img.src = p1imgArray[1].src;
-            }
-            else {
-                p1img.src = p1imgArray[0].src;
-            }
+            //coronafunction();
+            p1ImgFunction();
             colision()
             break;
 
@@ -105,16 +112,12 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p1bottom -= 20;
-            p1bottom100 = p1bottom+80;
+            p1bottom100 = p1bottom + 80;
 
             playerOne.style.bottom = p1bottom + "px";
 
-            if (p1img.src == p1imgArray[0].src) {
-                p1img.src = p1imgArray[1].src;
-            }
-            else {
-                p1img.src = p1imgArray[0].src;
-            }
+            //coronafunction();
+            p1ImgFunction();
             colision()
             break;
 
@@ -125,17 +128,12 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p2left -= 20;
-            p2left100 = p2left+70;
+            p2left100 = p2left + 70;
 
             playerTwo.style.left = p2left + "px";
-            playerTwo.classList="";
+            playerTwo.classList = "";
 
-            if (p2img.src == p2imgArray[0].src) {
-                p2img.src = p2imgArray[1].src;
-            }
-            else {
-                p2img.src = p2imgArray[0].src;
-            }
+            p2ImgFunction();
             colision()
             break;
 
@@ -144,17 +142,12 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p2left += 20;
-            p2left100 = p2left+70;
+            p2left100 = p2left + 70;
 
             playerTwo.style.left = p2left + "px";
-            playerTwo.classList="mirror";
-            
-            if (p2img.src == p2imgArray[0].src) {
-                p2img.src = p2imgArray[1].src;
-            }
-            else {
-                p2img.src = p2imgArray[0].src;
-            }
+            playerTwo.classList = "mirror";
+
+            p2ImgFunction();
             colision()
             break;
 
@@ -163,16 +156,11 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p2bottom += 20;
-            p2bottom100 = p2bottom+80;
+            p2bottom100 = p2bottom + 80;
 
             playerTwo.style.bottom = p2bottom + "px";
-            
-            if (p2img.src == p2imgArray[0].src) {
-                p2img.src = p2imgArray[1].src;
-            }
-            else {
-                p2img.src = p2imgArray[0].src;
-            }
+
+            p2ImgFunction();
             colision()
             break;
         case "ArrowDown":
@@ -180,16 +168,11 @@ document.addEventListener("keyup", (evt) => {
                 break;
             }
             p2bottom -= 20;
-            p2bottom100 = p2bottom+80;
+            p2bottom100 = p2bottom + 80;
 
             playerTwo.style.bottom = p2bottom + "px";
 
-            if (p2img.src == p2imgArray[0].src) {
-                p2img.src = p2imgArray[1].src;
-            }
-            else {
-                p2img.src = p2imgArray[0].src;
-            }
+            p2ImgFunction();
             colision()
             break;
 
@@ -198,26 +181,84 @@ document.addEventListener("keyup", (evt) => {
     }
 })
 
-
-function colision(){
+function colision() {
 
     if (
-        p1left > p2left100 ||  
+        p1left > p2left100 ||
 
-        p1left100 < p2left || 
+        p1left100 < p2left ||
 
         p1bottom > p2bottom100 ||
 
         p1bottom100 < p2bottom
-    ){
-        p1img.style.border="";
-        p2img.style.border="";
-    }else {
-        console.log("p1left " + p1left + " p1left100 " + p1left100 + " p1bottom " + p1bottom + " p1bottom100 " + p1bottom100);
-        console.log("p2left " + p2left + " p2left100 " + p2left100 + " p2bottom " + p2bottom + " p2bottom100 " + p2bottom100);
-        p1img.style.border="1px solid black";
-        p2img.style.border="1px solid red";
+    ) {
+        p1img.style.border = "";
+        p2img.style.border = "";
+    } else {
+
+        if(corona){
+            p2points++;
+            p2Pointstext.innerHTML = p2points;
+        }
+        else{
+            p1points++;
+            p1Pointstext.innerHTML = p1points;
+        }
+        corona = !corona;
+
+        p1bottom = 250;
+        p1left = 0;
+
+        p2bottom = 250;
+        p2left = 1100;
+    }
+    if(p1points==2 || p2points==2){
+        endgame();
     }
 }
 
+function p1ImgFunction() {
+    if (corona) {
+        if (p1img.src == p1imgArray[0].src) {
+            p1img.src = p1imgArray[1].src;
+        }
+        else {
+            p1img.src = p1imgArray[0].src;
+        }
+    }
+    else {
+        if (p1img.src == p1imgArray[2].src) {
+            p1img.src = p1imgArray[3].src;
+        }
+        else {
+            p1img.src = p1imgArray[2].src;
+        }
+    }
+}
 
+function p2ImgFunction() {
+    if (!corona) {
+
+        if (p2img.src == p2imgArray[0].src) {
+            p2img.src = p2imgArray[1].src;
+        }
+        else {
+            p2img.src = p2imgArray[0].src;
+        }
+    }
+    else{
+        if (p2img.src == p2imgArray[2].src) {
+            p2img.src = p2imgArray[3].src;
+        }
+        else {
+            p2img.src = p2imgArray[2].src;
+        }
+    }
+}
+
+function endgame(){
+    
+    location.reload();
+}
+
+///Byter corona true false var 10de sekund
