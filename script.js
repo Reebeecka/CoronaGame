@@ -5,6 +5,7 @@ let playerTwo = document.getElementById("p2");
 
 let p1Pointstext = document.getElementById("p1Points");
 let p2Pointstext = document.getElementById("p2Points");
+let timerText = document.getElementById("timer");
 
 let p1bottom = 250;
 let p1left = 0;
@@ -25,6 +26,13 @@ p1Pointstext.innerHTML = p1points;
 p2Pointstext.innerHTML = p2points;
 
 let corona = false;
+
+let timerIntervall;
+let time = 40;
+
+let coronaTimer;
+
+let endGameTimer;
 
 //PlayerOne images
 p1imgArray = new Array();
@@ -54,19 +62,30 @@ p2imgArray[3].src = 'p2runcorona.PNG';
 let p2img = document.getElementById("P2img");
 p2img.src = p2imgArray[0].src;
 
+timerIntervall = setInterval(timer, 1000);
+coronaTimer = setInterval(coronaSwitch, 10000);
+endGameTimer = setInterval(endgame, 40900)
 
+
+function coronaSwitch(){
+    corona = !corona
+    p1bottom = 250;
+    p1left = 0;
+    p2bottom = 250;
+    p2left = 1100;
+}
 
 document.addEventListener("keyup", (evt) => {
-
+    console.log(time);
     switch (evt.key) {
 
         //PlayerONE
         case "a":
             //PlayerOne utanför skärm till vänster utanför skärm
-            if (p1left < 20) {
+            if (p1left < 40) {
                 break;
             }
-            p1left -= 20;
+            p1left -= 40;
             p1left100 = p1left + 70;
 
             playerOne.style.left = p1left + "px";
@@ -79,10 +98,10 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "d":
-            if (p1left > 1080) {
+            if (p1left > 1060) {
                 break;
             }
-            p1left += 20;
+            p1left += 40;
             p1left100 = p1left + 70;
 
             playerOne.style.left = p1left + "px";
@@ -94,10 +113,10 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "w":
-            if (p1bottom > 480) {
+            if (p1bottom > 460) {
                 break;
             }
-            p1bottom += 20;
+            p1bottom += 40;
             p1bottom100 = p1bottom + 80;
 
             playerOne.style.bottom = p1bottom + "px";
@@ -108,10 +127,10 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "s":
-            if (p1bottom < 20) {
+            if (p1bottom < 40) {
                 break;
             }
-            p1bottom -= 20;
+            p1bottom -= 40;
             p1bottom100 = p1bottom + 80;
 
             playerOne.style.bottom = p1bottom + "px";
@@ -124,10 +143,10 @@ document.addEventListener("keyup", (evt) => {
         //PlaterTWO
         case "ArrowLeft":
 
-            if (p2left < 20) {
+            if (p2left < 40) {
                 break;
             }
-            p2left -= 20;
+            p2left -= 40;
             p2left100 = p2left + 70;
 
             playerTwo.style.left = p2left + "px";
@@ -138,10 +157,10 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "ArrowRight":
-            if (p2left > 1080) {
+            if (p2left > 1060) {
                 break;
             }
-            p2left += 20;
+            p2left += 40;
             p2left100 = p2left + 70;
 
             playerTwo.style.left = p2left + "px";
@@ -152,10 +171,10 @@ document.addEventListener("keyup", (evt) => {
             break;
 
         case "ArrowUp":
-            if (p2bottom > 480) {
+            if (p2bottom > 460) {
                 break;
             }
-            p2bottom += 20;
+            p2bottom += 40;
             p2bottom100 = p2bottom + 80;
 
             playerTwo.style.bottom = p2bottom + "px";
@@ -164,10 +183,10 @@ document.addEventListener("keyup", (evt) => {
             colision()
             break;
         case "ArrowDown":
-            if (p2bottom < 20) {
+            if (p2bottom < 40) {
                 break;
             }
-            p2bottom -= 20;
+            p2bottom -= 40;
             p2bottom100 = p2bottom + 80;
 
             playerTwo.style.bottom = p2bottom + "px";
@@ -180,6 +199,8 @@ document.addEventListener("keyup", (evt) => {
             break;
     }
 })
+
+
 
 function colision() {
 
@@ -204,16 +225,12 @@ function colision() {
             p1points++;
             p1Pointstext.innerHTML = p1points;
         }
-        corona = !corona;
 
         p1bottom = 250;
         p1left = 0;
 
         p2bottom = 250;
         p2left = 1100;
-    }
-    if(p1points==2 || p2points==2){
-        endgame();
     }
 }
 
@@ -257,8 +274,39 @@ function p2ImgFunction() {
 }
 
 function endgame(){
-    
-    location.reload();
+    let userplay;
+    if(p1points>p2points){
+        userplay=confirm("Player One won, vill du spela igen?")
+    }
+    else if(p2points>p1points){
+        userplay=confirm("Player Two won, vill du spela igen?")
+    }
+    else{
+        userplay=confirm("ingen vann ni suger")
+    } 
+
+    if(userplay==true){
+
+        location.reload();
+
+    }
+
+    else{
+
+        p1Pointstext.innerHTML="Skit ner";
+
+        p2Pointstext.innerHTML="dig då!";
+
+    }
+
+   
+
+}
+
+function timer(){
+    time--;
+    timerText.innerHTML = time
+
 }
 
 ///Byter corona true false var 10de sekund
