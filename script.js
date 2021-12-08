@@ -125,7 +125,7 @@ startBtn.remove(startBtn);
                 //coronaFunction();
                 p1ImgFunction();
 
-                colision()
+                collision()
                 break;
 
             case "d":
@@ -140,7 +140,7 @@ startBtn.remove(startBtn);
 
                 //coronafunction();
                 p1ImgFunction();
-                colision()
+                collision()
                 break;
 
             case "w":
@@ -154,7 +154,7 @@ startBtn.remove(startBtn);
 
                 //coronafunction();
                 p1ImgFunction();
-                colision()
+                collision()
                 break;
 
             case "s":
@@ -168,7 +168,7 @@ startBtn.remove(startBtn);
 
                 //coronafunction();
                 p1ImgFunction();
-                colision()
+                collision()
                 break;
 
             //PlaterTWO
@@ -184,7 +184,7 @@ startBtn.remove(startBtn);
                 playerTwo.classList = "";
 
                 p2ImgFunction();
-                colision()
+                collision()
                 break;
 
             case "ArrowRight":
@@ -198,7 +198,7 @@ startBtn.remove(startBtn);
                 playerTwo.classList = "mirror";
 
                 p2ImgFunction();
-                colision()
+                collision()
                 break;
 
             case "ArrowUp":
@@ -211,7 +211,7 @@ startBtn.remove(startBtn);
                 playerTwo.style.bottom = p2bottom + "px";
 
                 p2ImgFunction();
-                colision()
+                collision()
                 break;
             case "ArrowDown":
                 if (p2bottom < 40) {
@@ -223,7 +223,7 @@ startBtn.remove(startBtn);
                 playerTwo.style.bottom = p2bottom + "px";
 
                 p2ImgFunction();
-                colision()
+                collision()
                 break;
 
             default:
@@ -231,7 +231,7 @@ startBtn.remove(startBtn);
         }
     })
 
-    function colision() {
+    function collision() {
 
         if (
             p1left > p2left100 ||
@@ -331,6 +331,7 @@ startBtn.remove(startBtn);
             clearInterval(timerIntervall);
             clearInterval(coronaTimer);
             clearInterval(endGameTimer);
+            time = 40;
 
             p1Pointstext.innerHTML = "Skit ner";
             p2Pointstext.innerHTML = "dig då!";
@@ -354,6 +355,10 @@ startBtn.remove(startBtn);
         p1left = 0;
         p2bottom = 250;
         p2left = 1100;
+        playerOne.style.left = p1left + "px";
+        playerOne.style.bottom = p1bottom + "px";
+        playerTwo.style.left = p2left + "px";
+        playerTwo.style.bottom = p2bottom + "px";
         host.play();
 
     }
