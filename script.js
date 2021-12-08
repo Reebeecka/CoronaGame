@@ -39,21 +39,21 @@ let coronaTimer;
 let endGameTimer;
 
 let host = new Audio();
-host.src = "korthost.mp3";
+host.src = "img/korthost.mp3";
 
 let scoreSound = new Audio();
-scoreSound.src = "score.mp3";
+scoreSound.src = "img/score.mp3";
 
 //PlayerOne images
 let p1imgArray = new Array();
 p1imgArray[0] = new Image();
-p1imgArray[0].src = "p1still.PNG";
+p1imgArray[0].src = "img/p1still.PNG";
 p1imgArray[1] = new Image();
-p1imgArray[1].src = 'p1run.PNG';
+p1imgArray[1].src = 'img/p1run.PNG';
 p1imgArray[2] = new Image();
-p1imgArray[2].src = 'p1stillcorona.PNG';
+p1imgArray[2].src = 'img/p1stillcorona.PNG';
 p1imgArray[3] = new Image();
-p1imgArray[3].src = 'p1runcorona.PNG';
+p1imgArray[3].src = 'img/p1runcorona.PNG';
 
 let p1img = document.getElementById("P1img");
 p1img.src = p1imgArray[0].src;
@@ -61,13 +61,13 @@ p1img.src = p1imgArray[0].src;
 //PlayerTwo Images
 let p2imgArray = new Array();
 p2imgArray[0] = new Image();
-p2imgArray[0].src = "p2still.PNG";
+p2imgArray[0].src = "img/p2still.PNG";
 p2imgArray[1] = new Image();
-p2imgArray[1].src = 'p2run.PNG';
+p2imgArray[1].src = 'img/p2run.PNG';
 p2imgArray[2] = new Image();
-p2imgArray[2].src = 'p2stillcorona.PNG';
+p2imgArray[2].src = 'img/p2stillcorona.PNG';
 p2imgArray[3] = new Image();
-p2imgArray[3].src = 'p2runcorona.PNG';
+p2imgArray[3].src = 'img/p2runcorona.PNG';
 
 let p2img = document.getElementById("P2img");
 p2img.src = p2imgArray[0].src;
@@ -88,6 +88,8 @@ p2Pointstext.innerHTML = p2points;
 sound.play();
 sound.volume = 0.2;
 startBtn.remove(startBtn);
+p1ImgFunction()
+p2ImgFunction()
 
     document.addEventListener("keydown", function (evt) {
 
@@ -360,8 +362,8 @@ startBtn.remove(startBtn);
         playerTwo.style.left = p2left + "px";
         playerTwo.style.bottom = p2bottom + "px";
         host.play();
+        p1ImgFunction()
+        p2ImgFunction()
 
     }
 }
-
-///Byter corona true false var 10de sekund

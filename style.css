@@ -42,7 +42,7 @@
     height: 600px;
     border: 10px solid black;
     position: relative;
-    background-image: url("stranger.gif");
+    background-image: url("img/stranger.gif");
   }
 
   .mirror {
