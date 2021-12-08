@@ -6,6 +6,10 @@ let playerTwo = document.getElementById("p2");
 let p1Pointstext = document.getElementById("p1Points");
 let p2Pointstext = document.getElementById("p2Points");
 let timerText = document.getElementById("timer");
+let startBtn = document.createElement("button");
+let body = document.getElementById("body");
+body.append(startBtn);
+startBtn.innerText = "START";
 
 let p1bottom = 250;
 let p1left = 0;
@@ -34,6 +38,12 @@ let coronaTimer;
 
 let endGameTimer;
 
+let host = new Audio();
+host.src = "korthost.mp3";
+
+let scoreSound = new Audio();
+scoreSound.src = "score.mp3";
+
 //PlayerOne images
 let p1imgArray = new Array();
 p1imgArray[0] = new Image();
@@ -61,254 +71,292 @@ p2imgArray[3].src = 'p2runcorona.PNG';
 
 let p2img = document.getElementById("P2img");
 p2img.src = p2imgArray[0].src;
+startBtn.addEventListener("click", startGame);
+ 
 
+
+function startGame() {
 timerIntervall = setInterval(timer, 1000);
 coronaTimer = setInterval(coronaSwitch, 10000);
 endGameTimer = setInterval(endgame, 40900)
 
+var sound = document.getElementById("myAudio");
 
-function coronaSwitch(){
-    corona = !corona
-    p1bottom = 250;
-    p1left = 0;
-    p2bottom = 250;
-    p2left = 1100;
-}
+p1Pointstext.innerHTML = p1points;
+p2Pointstext.innerHTML = p2points;
 
-document.addEventListener("keyup", (evt) => {
-    console.log(time);
-    switch (evt.key) {
+sound.play();
+sound.volume = 0.2;
+startBtn.remove(startBtn);
 
-        //PlayerONE
-        case "a":
-            //PlayerOne utanför skärm till vänster utanför skärm
-            if (p1left < 40) {
+    document.addEventListener("keydown", function (evt) {
+
+        if (evt.key == "1") {
+
+            sound = document.getElementById("myAudio");
+
+            sound.play();
+
+        } else if (evt.key == "2") {
+
+            sound = document.getElementById("myAudio");
+
+            sound.pause();
+
+        }
+
+    });
+
+    document.addEventListener("keyup", (evt) => {
+        switch (evt.key) {
+
+            //PlayerONE
+            case "a":
+                //PlayerOne utanför skärm till vänster utanför skärm
+                if (p1left < 40) {
+                    break;
+                }
+                p1left -= 40;
+                p1left100 = p1left + 70;
+
+                playerOne.style.left = p1left + "px";
+                playerOne.classList = "mirror";
+
+                //coronaFunction();
+                p1ImgFunction();
+
+                colision()
                 break;
-            }
-            p1left -= 40;
-            p1left100 = p1left + 70;
 
+            case "d":
+                if (p1left > 1060) {
+                    break;
+                }
+                p1left += 40;
+                p1left100 = p1left + 70;
+
+                playerOne.style.left = p1left + "px";
+                playerOne.classList = "";
+
+                //coronafunction();
+                p1ImgFunction();
+                colision()
+                break;
+
+            case "w":
+                if (p1bottom > 460) {
+                    break;
+                }
+                p1bottom += 40;
+                p1bottom100 = p1bottom + 80;
+
+                playerOne.style.bottom = p1bottom + "px";
+
+                //coronafunction();
+                p1ImgFunction();
+                colision()
+                break;
+
+            case "s":
+                if (p1bottom < 40) {
+                    break;
+                }
+                p1bottom -= 40;
+                p1bottom100 = p1bottom + 80;
+
+                playerOne.style.bottom = p1bottom + "px";
+
+                //coronafunction();
+                p1ImgFunction();
+                colision()
+                break;
+
+            //PlaterTWO
+            case "ArrowLeft":
+
+                if (p2left < 40) {
+                    break;
+                }
+                p2left -= 40;
+                p2left100 = p2left + 70;
+
+                playerTwo.style.left = p2left + "px";
+                playerTwo.classList = "";
+
+                p2ImgFunction();
+                colision()
+                break;
+
+            case "ArrowRight":
+                if (p2left > 1060) {
+                    break;
+                }
+                p2left += 40;
+                p2left100 = p2left + 70;
+
+                playerTwo.style.left = p2left + "px";
+                playerTwo.classList = "mirror";
+
+                p2ImgFunction();
+                colision()
+                break;
+
+            case "ArrowUp":
+                if (p2bottom > 460) {
+                    break;
+                }
+                p2bottom += 40;
+                p2bottom100 = p2bottom + 80;
+
+                playerTwo.style.bottom = p2bottom + "px";
+
+                p2ImgFunction();
+                colision()
+                break;
+            case "ArrowDown":
+                if (p2bottom < 40) {
+                    break;
+                }
+                p2bottom -= 40;
+                p2bottom100 = p2bottom + 80;
+
+                playerTwo.style.bottom = p2bottom + "px";
+
+                p2ImgFunction();
+                colision()
+                break;
+
+            default:
+                break;
+        }
+    })
+
+    function colision() {
+
+        if (
+            p1left > p2left100 ||
+
+            p1left100 < p2left ||
+
+            p1bottom > p2bottom100 ||
+
+            p1bottom100 < p2bottom
+        ) {
+            //no collision
+        } else {
+
+            if (corona) {
+                p2points++;
+                p2Pointstext.innerHTML = p2points;  
+            }
+            else {
+                p1points++;
+                p1Pointstext.innerHTML = p1points;
+            }
+
+            p1bottom = 250;
+            p1left = 0;
+            p2bottom = 250;
+            p2left = 1100;
             playerOne.style.left = p1left + "px";
-            playerOne.classList = "mirror";
-
-            //coronaFunction();
-            p1ImgFunction();
-
-            colision()
-            break;
-
-        case "d":
-            if (p1left > 1060) {
-                break;
-            }
-            p1left += 40;
-            p1left100 = p1left + 70;
-
-            playerOne.style.left = p1left + "px";
-            playerOne.classList = "";
-
-            //coronafunction();
-            p1ImgFunction();
-            colision()
-            break;
-
-        case "w":
-            if (p1bottom > 460) {
-                break;
-            }
-            p1bottom += 40;
-            p1bottom100 = p1bottom + 80;
-
             playerOne.style.bottom = p1bottom + "px";
-
-            //coronafunction();
-            p1ImgFunction();
-            colision()
-            break;
-
-        case "s":
-            if (p1bottom < 40) {
-                break;
-            }
-            p1bottom -= 40;
-            p1bottom100 = p1bottom + 80;
-
-            playerOne.style.bottom = p1bottom + "px";
-
-            //coronafunction();
-            p1ImgFunction();
-            colision()
-            break;
-
-        //PlaterTWO
-        case "ArrowLeft":
-
-            if (p2left < 40) {
-                break;
-            }
-            p2left -= 40;
-            p2left100 = p2left + 70;
-
             playerTwo.style.left = p2left + "px";
-            playerTwo.classList = "";
-
-            p2ImgFunction();
-            colision()
-            break;
-
-        case "ArrowRight":
-            if (p2left > 1060) {
-                break;
-            }
-            p2left += 40;
-            p2left100 = p2left + 70;
-
-            playerTwo.style.left = p2left + "px";
-            playerTwo.classList = "mirror";
-
-            p2ImgFunction();
-            colision()
-            break;
-
-        case "ArrowUp":
-            if (p2bottom > 460) {
-                break;
-            }
-            p2bottom += 40;
-            p2bottom100 = p2bottom + 80;
-
             playerTwo.style.bottom = p2bottom + "px";
-
-            p2ImgFunction();
-            colision()
-            break;
-        case "ArrowDown":
-            if (p2bottom < 40) {
-                break;
-            }
-            p2bottom -= 40;
-            p2bottom100 = p2bottom + 80;
-
-            playerTwo.style.bottom = p2bottom + "px";
-
-            p2ImgFunction();
-            colision()
-            break;
-
-        default:
-            break;
+            scoreSound.play();
+            scoreSound.volume = 0.2;
+        }
     }
-})
 
-
-
-function colision() {
-
-    if (
-        p1left > p2left100 ||
-
-        p1left100 < p2left ||
-
-        p1bottom > p2bottom100 ||
-
-        p1bottom100 < p2bottom
-    ) {
-        p1img.style.border = "";
-        p2img.style.border = "";
-    } else {
-
-        if(corona){
-            p2points++;
-            p2Pointstext.innerHTML = p2points;
+    function p1ImgFunction() {
+        if (corona) {
+            if (p1img.src == p1imgArray[0].src) {
+                p1img.src = p1imgArray[1].src;
+            }
+            else {
+                p1img.src = p1imgArray[0].src;
+            }
         }
-        else{
-            p1points++;
-            p1Pointstext.innerHTML = p1points;
+        else {
+            if (p1img.src == p1imgArray[2].src) {
+                p1img.src = p1imgArray[3].src;
+            }
+            else {
+                p1img.src = p1imgArray[2].src;
+            }
+        }
+    }
+
+    function p2ImgFunction() {
+        if (!corona) {
+
+            if (p2img.src == p2imgArray[0].src) {
+                p2img.src = p2imgArray[1].src;
+            }
+            else {
+                p2img.src = p2imgArray[0].src;
+            }
+        }
+        else {
+            if (p2img.src == p2imgArray[2].src) {
+                p2img.src = p2imgArray[3].src;
+            }
+            else {
+                p2img.src = p2imgArray[2].src;
+            }
+        }
+    }
+
+    function endgame() {
+
+        let userplay;
+        if (p1points > p2points) {
+            userplay = confirm("Player One won, vill du spela igen?")
+        }
+        else if (p2points > p1points) {
+            userplay = confirm("Player Two won, vill du spela igen?")
+        }
+        else {
+            userplay = confirm("ingen vann ni suger")
         }
 
+        if (userplay == true) {
+
+            location.reload();
+
+        }
+
+        else {
+
+            body.append(startBtn);
+            clearInterval(timerIntervall);
+            clearInterval(coronaTimer);
+            clearInterval(endGameTimer);
+
+            p1Pointstext.innerHTML = "Skit ner";
+            p2Pointstext.innerHTML = "dig då!";
+
+        }
+
+
+
+    }
+
+    function timer() {
+        time--;
+        timerText.innerHTML = time
+
+
+    }
+
+    function coronaSwitch() {
+        corona = !corona
         p1bottom = 250;
         p1left = 0;
-
         p2bottom = 250;
         p2left = 1100;
-    }
-}
-
-function p1ImgFunction() {
-    if (corona) {
-        if (p1img.src == p1imgArray[0].src) {
-            p1img.src = p1imgArray[1].src;
-        }
-        else {
-            p1img.src = p1imgArray[0].src;
-        }
-    }
-    else {
-        if (p1img.src == p1imgArray[2].src) {
-            p1img.src = p1imgArray[3].src;
-        }
-        else {
-            p1img.src = p1imgArray[2].src;
-        }
-    }
-}
-
-function p2ImgFunction() {
-    if (!corona) {
-
-        if (p2img.src == p2imgArray[0].src) {
-            p2img.src = p2imgArray[1].src;
-        }
-        else {
-            p2img.src = p2imgArray[0].src;
-        }
-    }
-    else{
-        if (p2img.src == p2imgArray[2].src) {
-            p2img.src = p2imgArray[3].src;
-        }
-        else {
-            p2img.src = p2imgArray[2].src;
-        }
-    }
-}
-
-function endgame(){
-
-    let userplay;
-    if(p1points>p2points){
-        userplay=confirm("Player One won, vill du spela igen?")
-    }
-    else if(p2points>p1points){
-        userplay=confirm("Player Two won, vill du spela igen?")
-    }
-    else{
-        userplay=confirm("ingen vann ni suger")
-    } 
-
-    if(userplay==true){
-
-        location.reload();
+        host.play();
 
     }
-
-    else{
-
-        p1Pointstext.innerHTML="Skit ner";
-
-        p2Pointstext.innerHTML="dig då!";
-
-    }
-
-   
-
-}
-
-function timer(){
-    time--;
-    timerText.innerHTML = time
-
-
 }
 
 ///Byter corona true false var 10de sekund
