@@ -27,7 +27,7 @@ p2Pointstext.innerHTML = p2points;
 let corona = false;
 
 //PlayerOne images
-p1imgArray = new Array();
+let p1imgArray = new Array();
 p1imgArray[0] = new Image();
 p1imgArray[0].src = "p1still.PNG";
 p1imgArray[1] = new Image();
@@ -41,7 +41,7 @@ let p1img = document.getElementById("P1img");
 p1img.src = p1imgArray[0].src;
 
 //PlayerTwo Images
-p2imgArray = new Array();
+let p2imgArray = new Array();
 p2imgArray[0] = new Image();
 p2imgArray[0].src = "p2still.PNG";
 p2imgArray[1] = new Image();
@@ -257,8 +257,15 @@ function p2ImgFunction() {
 }
 
 function endgame(){
+    let userplay=confirm("GameOver vill du spela igen?")
+    if(userplay==true){
+        location.reload();
+    }
+    else{
+        p1Pointstext.innerHTML="Skit ner";
+        p2Pointstext.innerHTML="dig då!";
+    }
     
-    location.reload();
 }
 
 ///Byter corona true false var 10de sekund
