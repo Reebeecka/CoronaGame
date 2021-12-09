@@ -47,13 +47,13 @@ scoreSound.src = "img/score.mp3";
 //PlayerOne images
 let p1imgArray = new Array();
 p1imgArray[0] = new Image();
-p1imgArray[0].src = "./img/p1still.PNG";
+p1imgArray[0].src = "img/p1still.png";
 p1imgArray[1] = new Image();
-p1imgArray[1].src = './img/p1run.PNG';
+p1imgArray[1].src = 'img/p1run.png';
 p1imgArray[2] = new Image();
-p1imgArray[2].src = './img/p1stillcorona.PNG';
+p1imgArray[2].src = 'img/p1stillcorona.png';
 p1imgArray[3] = new Image();
-p1imgArray[3].src = './img/p1runcorona.PNG';
+p1imgArray[3].src = 'img/p1runcorona.png';
 
 let p1img = document.getElementById("P1img");
 p1img.src = p1imgArray[0].src;
@@ -61,13 +61,13 @@ p1img.src = p1imgArray[0].src;
 //PlayerTwo Images
 let p2imgArray = new Array();
 p2imgArray[0] = new Image();
-p2imgArray[0].src = "./img/p2still.PNG";
+p2imgArray[0].src = "img/p2still.png";
 p2imgArray[1] = new Image();
-p2imgArray[1].src = './img/p2run.PNG';
+p2imgArray[1].src = 'img/p2run.png';
 p2imgArray[2] = new Image();
-p2imgArray[2].src = './img/p2stillcorona.PNG';
+p2imgArray[2].src = 'img/p2stillcorona.png';
 p2imgArray[3] = new Image();
-p2imgArray[3].src = './img/p2runcorona.PNG';
+p2imgArray[3].src = 'img/p2runcorona.png';
 
 let p2img = document.getElementById("P2img");
 p2img.src = p2imgArray[0].src;
